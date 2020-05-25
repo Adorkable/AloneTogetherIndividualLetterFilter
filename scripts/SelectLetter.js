@@ -8,13 +8,13 @@ const Animation = require('Animation');
 
 const canvas0 = Scene.root.findFirst('canvas0');
 
-const aloneY = 0.35
+const aloneY = 0
 const togetherY = 345
 const endScale = Reactive.point2d(8, 8)
 const endings = [
 
 	{ // a
-		position: Reactive.point2d(2.15, aloneY),
+		position: Reactive.point2d(0, aloneY),
 		scale: endScale
 	},
 
