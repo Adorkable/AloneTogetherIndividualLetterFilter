@@ -10,7 +10,7 @@ const canvas0 = Scene.root.findFirst('canvas0');
 
 const aloneY = 0
 const togetherY = 345
-const endScale = Reactive.point2d(8, 8)
+const endScale = Reactive.point2d(1, 1)
 const endings = [
 
 	{ // a
