@@ -1,5 +1,6 @@
 import { Letters } from './Letters'
-import { EventSourceToPromise } from './Utility';
+import { EventSourceToPromise, playAudioOnce } from './Utility';
+import { Diagnostics } from './SelectLetter';
 const Reactive = require('Reactive');
 const Time = require('Time')
 const Animation = require('Animation');
@@ -60,17 +61,19 @@ class AloneTogetherScene {
         })
     }
 
-    animatePuffOfSmoke(): Promise<void> {
+    animatePuffOfSmoke(durationMilliseconds: number): Promise<void> {
         this.puffOfSmoke.birthrate = Reactive.val(2000)
+
+        playAudioOnce('reveal twinkle', 3500)
 
         Time.setTimeout(() => {
             // this.animateForehead(500 - 350)
-        }, 250)
+        }, durationMilliseconds / 2)
 
         return new Promise((resolve) => {
             Time.setTimeout(() => {
                 resolve()
-            }, 500)
+            }, durationMilliseconds)
         })
     }
 
@@ -86,6 +89,7 @@ class AloneTogetherScene {
                 this.puffOfSmokeMaterial.diffuse = material.diffuse
                 this.puffOfSmokeMaterial.doubleSided = Reactive.val(true)
             }).then(() => {
+                playAudioOnce('suck up', 1250)
                 return this.letters.animate(
                     Reactive.point(
                         face.forehead.top.x.pinLastValue(),
@@ -96,13 +100,13 @@ class AloneTogetherScene {
                     letterIndex
                 )
             }).then(() => {
-                return this.animatePuffOfSmoke()
+                return this.animatePuffOfSmoke(500)
             })
             .then(() => {
                 this.puffOfSmoke.birthrate = Reactive.val(0)
                 this.forehead.hidden = false
+                return playAudioOnce('kids cheering', 4000)
             })
-
     }
 }
 

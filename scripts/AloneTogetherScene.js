@@ -44,15 +44,16 @@ var AloneTogetherScene = /** @class */ (function () {
             return Utility_1.EventSourceToPromise(driver.onCompleted());
         });
     };
-    AloneTogetherScene.prototype.animatePuffOfSmoke = function () {
+    AloneTogetherScene.prototype.animatePuffOfSmoke = function (durationMilliseconds) {
         this.puffOfSmoke.birthrate = Reactive.val(2000);
+        Utility_1.playAudioOnce('reveal twinkle', 3500);
         Time.setTimeout(function () {
             // this.animateForehead(500 - 350)
-        }, 250);
+        }, durationMilliseconds / 2);
         return new Promise(function (resolve) {
             Time.setTimeout(function () {
                 resolve();
-            }, 500);
+            }, durationMilliseconds);
         });
     };
     AloneTogetherScene.prototype.startSequence = function (letterIndex) {
@@ -67,13 +68,15 @@ var AloneTogetherScene = /** @class */ (function () {
             _this.puffOfSmokeMaterial.diffuse = material.diffuse;
             _this.puffOfSmokeMaterial.doubleSided = Reactive.val(true);
         }).then(function () {
+            Utility_1.playAudioOnce('suck up', 1250);
             return _this.letters.animate(Reactive.point(face.forehead.top.x.pinLastValue(), face.forehead.top.y.pinLastValue(), face.forehead.top.z.pinLastValue()), Reactive.point(0, 0, 0), 1250, letterIndex);
         }).then(function () {
-            return _this.animatePuffOfSmoke();
+            return _this.animatePuffOfSmoke(500);
         })
             .then(function () {
             _this.puffOfSmoke.birthrate = Reactive.val(0);
             _this.forehead.hidden = false;
+            return Utility_1.playAudioOnce('kids cheering', 4000);
         });
     };
     return AloneTogetherScene;

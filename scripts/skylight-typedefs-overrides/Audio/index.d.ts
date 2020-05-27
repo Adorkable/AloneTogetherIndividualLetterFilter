@@ -1,4 +1,6 @@
 /// <reference path="../Reactive.ScalarSignal/index.d.ts" />
+/// <reference path="../AudioSource/index.d.ts" />
+/// <reference path="../void/index.d.ts" />
 /// <reference path="../Reactive.BoolSignal/index.d.ts" />
 
 /// <reference path="../Audio.PlaybackController/index.d.ts" />
