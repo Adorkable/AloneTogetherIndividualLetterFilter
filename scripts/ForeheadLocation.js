@@ -1,9 +1,10 @@
+"use strict";
 /**
  * (c) Facebook, Inc. and its affiliates. Confidential and proprietary.
  */
-
-const Reactive = require('Reactive');
-
+exports.__esModule = true;
+exports.Diagnostics = void 0;
+var Reactive = require('Reactive');
 //==============================================================================
 // Welcome to scripting in Spark AR Studio! Helpful links:
 //
@@ -14,74 +15,55 @@ const Reactive = require('Reactive');
 //
 // For projects created with v87 onwards, JavaScript is always executed in strict mode.
 //==============================================================================
-
 // How to load in modules
-const Scene = require('Scene');
-const Patches = require('Patches');
-
+var Scene = require('Scene');
+var Patches = require('Patches');
 // Use export keyword to make a symbol available in scripting debug console
-export const Diagnostics = require('Diagnostics');
-
-const updatePosition = (position) => {
-    Patches.inputs.setPoint("foreheadPosition", position)
-}
-
-const updateRotation = (rotation) => {
-    Patches.inputs.setVector("foreheadRotation", rotation)
-}
-
-const updateScale = (scale) => {
-    Patches.inputs.setVector("foreheadScale", scale)
-}
-
-let count = 0;
-const updateForeheadTransform = (foreheadTransform) => {
-    let c = count;
-    count += 1;
-
-    let x = foreheadTransform.position.x.pinLastValue();
-    let y = foreheadTransform.position.y.pinLastValue();
-    let z = foreheadTransform.position.z.pinLastValue();
-
+exports.Diagnostics = require('Diagnostics');
+var updatePosition = function (position) {
+    Patches.inputs.setPoint("foreheadPosition", position);
+};
+var updateRotation = function (rotation) {
+    Patches.inputs.setVector("foreheadRotation", rotation);
+};
+var updateScale = function (scale) {
+    Patches.inputs.setVector("foreheadScale", scale);
+};
+var updateForeheadTransform = function (foreheadTransform) {
+    var x = foreheadTransform.position.x.pinLastValue();
+    var y = foreheadTransform.position.y.pinLastValue();
+    var z = foreheadTransform.position.z.pinLastValue();
     updatePosition(Reactive.point(x, y, z));
-
-    foreheadTransform.position.x.monitor().subscribe((event) => {
-        x = event.newValue
+    foreheadTransform.position.x.monitor().subscribe(function (event) {
+        x = event.newValue;
         updatePosition(Reactive.point(x, y, z));
-    })
-
-    foreheadTransform.position.y.monitor().subscribe((event) => {
-        y = event.newValue
+    });
+    foreheadTransform.position.y.monitor().subscribe(function (event) {
+        y = event.newValue;
         updatePosition(Reactive.point(x, y, z));
-    })
-
-    foreheadTransform.position.z.monitor().subscribe((event) => {
-        z = event.newValue
+    });
+    foreheadTransform.position.z.monitor().subscribe(function (event) {
+        z = event.newValue;
         updatePosition(Reactive.point(x, y, z));
-    })
-
+    });
     // const rotation = ReactiveModule.point(
     //     foreheadTransform.rotationX.pinLastValue(),
     //     foreheadTransform.rotationY.pinLastValue(),
     //     foreheadTransform.rotationZ.pinLastValue()
     // )
     // updateRotation(rotation)
-
     // const scale = foreheadTransform.scale.pinLastValue();
     // updateScale(scale)
-
     // foreheadTransform.position.monitor().subscribe((event) => {
     //     updatePosition(event.newValue)
     //     Diagnostics.log("Count " + c)
     // })
-}
-
+};
 Scene.root.findFirst("forehead", { recursive: true })
-    .then((forehead) => {
-        const transform = forehead.worldTransform
-        updateForeheadTransform(transform);
-
-        // forehead.worldTransform.monitor().subscribe((event) => {
-        //     updateForeheadTransform(event.newValue)
-        // })
-    })
+    .then(function (forehead) {
+    var transform = forehead.worldTransform;
+    updateForeheadTransform(transform);
+    // forehead.worldTransform.monitor().subscribe((event) => {
+    //     updateForeheadTransform(event.newValue)
+    // })
+});

@@ -1,105 +1,88 @@
-const Scene = require('Scene');
-export const Diagnostics = require('Diagnostics');
-
-const Patches = require('Patches');
-const Reactive = require('Reactive');
-const TouchGestures = require('TouchGestures');
-const Animation = require('Animation');
-
-const canvas0 = Scene.root.findFirst('canvas0');
-
-const aloneY = 0
-const togetherY = 345
-const endScale = Reactive.point2d(1, 1)
-const endings = [
-
-	{ // a
-		position: Reactive.point2d(0, aloneY),
-		scale: endScale
-	},
-
-	{ // l
-		position: Reactive.point2d(1.81, aloneY),
-		scale: endScale
-	},
-
-	{ // o
-		position: Reactive.point2d(1.38, aloneY),
-		scale: endScale
-	},
-
-	{ // n
-		position: Reactive.point2d(0.93, aloneY),
-		scale: endScale
-	},
-
-	{ // e
-		position: Reactive.point2d(0.51, aloneY),
-		scale: endScale
-	},
-	////////////////////////////
-	{ // t
-		position: Reactive.point2d(920, togetherY),
-		scale: endScale
-	},
-
-	{ // o
-		position: Reactive.point2d(580, togetherY),
-		scale: endScale
-	},
-
-	{ // g
-		position: Reactive.point2d(210, togetherY),
-		scale: endScale
-	},
-
-	{ // e
-		position: Reactive.point2d(-100, togetherY),
-		scale: endScale
-	},
-
-	{ // t
-		position: Reactive.point2d(-370, togetherY),
-		scale: endScale
-	},
-
-	{ // h
-		position: Reactive.point2d(-640, togetherY),
-		scale: endScale
-	},
-
-	{ // e
-		position: Reactive.point2d(-960, togetherY),
-		scale: endScale
-	},
-
-	{ // r
-		position: Reactive.point2d(-1280, togetherY),
-		scale: endScale
-	}
+"use strict";
+exports.__esModule = true;
+exports.Diagnostics = void 0;
+var Scene = require('Scene');
+exports.Diagnostics = require('Diagnostics');
+var Patches = require('Patches');
+var Reactive = require('Reactive');
+var TouchGestures = require('TouchGestures');
+var Animation = require('Animation');
+var canvas0 = Scene.root.findFirst('canvas0');
+var aloneY = 0;
+var togetherY = 345;
+var endScale = Reactive.point2d(1, 1);
+var endings = [
+    {
+        position: Reactive.point2d(0, aloneY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(1.81, aloneY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(1.38, aloneY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(0.93, aloneY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(0.51, aloneY),
+        scale: endScale
+    },
+    ////////////////////////////
+    {
+        position: Reactive.point2d(920, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(580, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(210, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(-100, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(-370, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(-640, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(-960, togetherY),
+        scale: endScale
+    },
+    {
+        position: Reactive.point2d(-1280, togetherY),
+        scale: endScale
+    }
 ];
-
-const setLetterEnding = (letterIndex) => {
-	const ending = endings[letterIndex];
-	if (!ending) {
-		throw Error("No endings for letterIndex '" + letterIndex + "'")
-	}
-
-	const endPosition = ending.position;
-	const endScale = ending.scale;
-
-	Patches.inputs.setPoint2D('endPosition', endPosition);
-	Patches.inputs.setPoint2D('endScale', endScale);
-}
-
+var setLetterEnding = function (letterIndex) {
+    var ending = endings[letterIndex];
+    if (!ending) {
+        throw Error("No endings for letterIndex '" + letterIndex + "'");
+    }
+    var endPosition = ending.position;
+    var endScale = ending.scale;
+    Patches.inputs.setPoint2D('endPosition', endPosition);
+    Patches.inputs.setPoint2D('endScale', endScale);
+};
 TouchGestures.onTap(canvas0).subscribe(function () {
-	Patches.outputs.getScalar('letterIndex')
-		.then((letterIndexSignal) => {
-			const letterIndex = letterIndexSignal.pinLastValue()
-			setLetterEnding(letterIndex)
-
-			letterIndexSignal.monitor().subscribe((event) => {
-				setLetterEnding(event.newValue)
-			})
-		});
+    Patches.outputs.getScalar('letterIndex')
+        .then(function (letterIndexSignal) {
+        var letterIndex = letterIndexSignal.pinLastValue();
+        setLetterEnding(letterIndex);
+        letterIndexSignal.monitor().subscribe(function (event) {
+            setLetterEnding(event.newValue);
+        });
+    });
 });

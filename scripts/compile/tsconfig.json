@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig",
+  "include": [
+    "./**/*.js",
+    "./**/*.ts",
+  ],
+  "exclude": [],
+  "compilerOptions": {
+    "baseUrl": "../skylight-typedefs-overrides",
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "../",
+    "lib": [
+      "ES2020"
+    ]
+  }
+}

@@ -1,18 +1,14 @@
-import { Diagnostics } from './SelectLetter';
-
-const Patches = require('Patches');
-
-const updateTextLength = (text) => {
+"use strict";
+exports.__esModule = true;
+var Patches = require('Patches');
+var updateTextLength = function (text) {
     Patches.inputs.setScalar('textLength', text.length);
-}
-
+};
 Patches.outputs.getString('string')
-    .then((stringSignal) => {
-        const string = stringSignal.pinLastValue()
-        updateTextLength(string)
-
-        stringSignal.monitor().subscribe((event) => {
-            updateTextLength(event.newValue)
-        })
-    })
-
+    .then(function (stringSignal) {
+    var string = stringSignal.pinLastValue();
+    updateTextLength(string);
+    stringSignal.monitor().subscribe(function (event) {
+        updateTextLength(event.newValue);
+    });
+});
