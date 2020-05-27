@@ -78,7 +78,7 @@ class Letters {
             mirror: false
         })
         const fasterDriver = Animation.timeDriver({
-            durationMilliseconds: durationMilliseconds / 2,
+            durationMilliseconds: durationMilliseconds / 3 * 2,
             loopCount: 1,
             mirror: false
         })

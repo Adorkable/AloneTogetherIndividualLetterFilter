@@ -104,7 +104,7 @@ var Letters = /** @class */ (function () {
                             mirror: false
                         });
                         fasterDriver = Animation.timeDriver({
-                            durationMilliseconds: durationMilliseconds / 2,
+                            durationMilliseconds: durationMilliseconds / 3 * 2,
                             loopCount: 1,
                             mirror: false
                         });
