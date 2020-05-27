@@ -2,6 +2,9 @@ import { Letters } from './Letters'
 const Reactive = require('Reactive');
 const Time = require('Time')
 const Animation = require('Animation');
+const FaceTracking = require('FaceTracking');
+
+const face = FaceTracking.face(0);
 
 class AloneTogetherScene {
     letterParent: SceneObjectBase
@@ -70,7 +73,7 @@ class AloneTogetherScene {
         return new Promise((resolve) => {
             Time.setTimeout(() => {
                 resolve()
-            }, 250)
+            }, 1000)
         })
     }
 
@@ -87,9 +90,12 @@ class AloneTogetherScene {
                 this.puffOfSmokeMaterial.doubleSided = Reactive.val(true)
             }).then(() => {
                 return this.letters.animate(
+                    Reactive.point(
+                        face.forehead.top.x.pinLastValue(),
+                        face.forehead.top.y.pinLastValue(),
+                        face.forehead.top.z.pinLastValue()),
                     Reactive.point(0, 0, 0),
-                    Reactive.point(0, 0, 0),
-                    500,
+                    1000,
                     letterIndex
                 )
             }).then(() => {

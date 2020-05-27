@@ -5,6 +5,8 @@ var Letters_1 = require("./Letters");
 var Reactive = require('Reactive');
 var Time = require('Time');
 var Animation = require('Animation');
+var FaceTracking = require('FaceTracking');
+var face = FaceTracking.face(0);
 var AloneTogetherScene = /** @class */ (function () {
     function AloneTogetherScene(letterParent, puffOfSmoke, forehead) {
         var _this = this;
@@ -53,7 +55,7 @@ var AloneTogetherScene = /** @class */ (function () {
         return new Promise(function (resolve) {
             Time.setTimeout(function () {
                 resolve();
-            }, 250);
+            }, 1000);
         });
     };
     AloneTogetherScene.prototype.startSequence = function (letterIndex) {
@@ -68,7 +70,7 @@ var AloneTogetherScene = /** @class */ (function () {
             _this.puffOfSmokeMaterial.diffuse = material.diffuse;
             _this.puffOfSmokeMaterial.doubleSided = Reactive.val(true);
         }).then(function () {
-            return _this.letters.animate(Reactive.point(0, 0, 0), Reactive.point(0, 0, 0), 500, letterIndex);
+            return _this.letters.animate(Reactive.point(face.forehead.top.x.pinLastValue(), face.forehead.top.y.pinLastValue(), face.forehead.top.z.pinLastValue()), Reactive.point(0, 0, 0), 1000, letterIndex);
         }).then(function () {
             return _this.animatePuffOfSmoke();
         })
