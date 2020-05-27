@@ -40,6 +40,7 @@ exports.Letters = exports.Diagnostics = void 0;
 exports.Diagnostics = require('Diagnostics');
 var Reactive = require('Reactive');
 var Animation = require('Animation');
+var Utility_1 = require("./Utility");
 var Letters = /** @class */ (function () {
     function Letters(parent) {
         this.letters = [
@@ -129,11 +130,7 @@ var Letters = /** @class */ (function () {
                         _a.sent();
                         fasterDriver.start();
                         slowerDriver.start();
-                        return [2 /*return*/, new Promise(function (resolve) {
-                                slowerDriver.onCompleted().subscribe(function (event) {
-                                    resolve(event);
-                                });
-                            })];
+                        return [2 /*return*/, Utility_1.EventSourceToPromise(slowerDriver.onCompleted())];
                 }
             });
         });

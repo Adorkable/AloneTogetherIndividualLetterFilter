@@ -1,9 +1,11 @@
-var _this = this;
-var Animation = require('Animation');
-Animation.TimeDriver.onCompletedPromise = function () {
+"use strict";
+exports.__esModule = true;
+exports.EventSourceToPromise = void 0;
+var EventSourceToPromise = function (eventSource) {
     return new Promise(function (resolve) {
-        _this.onCompleted().subscribe(function (event) {
+        eventSource.subscribe(function (event) {
             resolve(event);
         });
     });
 };
+exports.EventSourceToPromise = EventSourceToPromise;

@@ -2,6 +2,8 @@ export const Diagnostics = require('Diagnostics');
 const Reactive = require('Reactive');
 const Animation = require('Animation');
 
+import { EventSourceToPromise } from "./Utility";
+
 interface LetterInformation {
     letter: Plane
     initialPosition: PointSignal
@@ -123,11 +125,7 @@ class Letters {
 
         fasterDriver.start()
         slowerDriver.start()
-        return new Promise((resolve) => {
-            slowerDriver.onCompleted().subscribe((event) => {
-                resolve(event)
-            })
-        })
+        return EventSourceToPromise(slowerDriver.onCompleted())
     }
 
     letterAtIndex(index: number): LetterInformation | void {

@@ -1,9 +1,11 @@
-const Animation = require('Animation');
-
-Animation.TimeDriver.onCompletedPromise = (): Promise<mixed> => {
+const EventSourceToPromise = (eventSource: EventSource): Promise<mixed> => {
     return new Promise((resolve) => {
-        this.onCompleted().subscribe((event) => {
+        eventSource.subscribe((event) => {
             resolve(event)
         })
     })
+}
+
+export {
+    EventSourceToPromise
 }

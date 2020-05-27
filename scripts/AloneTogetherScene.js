@@ -2,6 +2,7 @@
 exports.__esModule = true;
 exports.AloneTogetherScene = void 0;
 var Letters_1 = require("./Letters");
+var Utility_1 = require("./Utility");
 var Reactive = require('Reactive');
 var Time = require('Time');
 var Animation = require('Animation');
@@ -40,22 +41,18 @@ var AloneTogetherScene = /** @class */ (function () {
         return this.forehead.getMaterial().then(function (material) {
             material.opacity = Animation.animate(driver, sampler);
             driver.start();
-            return new Promise(function (resolve) {
-                driver.onCompleted().subscribe(function (event) {
-                    resolve(event);
-                });
-            });
+            return Utility_1.EventSourceToPromise(driver.onCompleted());
         });
     };
     AloneTogetherScene.prototype.animatePuffOfSmoke = function () {
-        this.puffOfSmoke.birthrate = Reactive.val(4000);
+        this.puffOfSmoke.birthrate = Reactive.val(2000);
         Time.setTimeout(function () {
             // this.animateForehead(500 - 350)
         }, 250);
         return new Promise(function (resolve) {
             Time.setTimeout(function () {
                 resolve();
-            }, 1000);
+            }, 500);
         });
     };
     AloneTogetherScene.prototype.startSequence = function (letterIndex) {
@@ -70,7 +67,7 @@ var AloneTogetherScene = /** @class */ (function () {
             _this.puffOfSmokeMaterial.diffuse = material.diffuse;
             _this.puffOfSmokeMaterial.doubleSided = Reactive.val(true);
         }).then(function () {
-            return _this.letters.animate(Reactive.point(face.forehead.top.x.pinLastValue(), face.forehead.top.y.pinLastValue(), face.forehead.top.z.pinLastValue()), Reactive.point(0, 0, 0), 1000, letterIndex);
+            return _this.letters.animate(Reactive.point(face.forehead.top.x.pinLastValue(), face.forehead.top.y.pinLastValue(), face.forehead.top.z.pinLastValue()), Reactive.point(0, 0, 0), 1250, letterIndex);
         }).then(function () {
             return _this.animatePuffOfSmoke();
         })

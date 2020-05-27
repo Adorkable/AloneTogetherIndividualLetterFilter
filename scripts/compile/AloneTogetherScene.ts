@@ -1,4 +1,5 @@
 import { Letters } from './Letters'
+import { EventSourceToPromise } from './Utility';
 const Reactive = require('Reactive');
 const Time = require('Time')
 const Animation = require('Animation');
@@ -55,16 +56,12 @@ class AloneTogetherScene {
             material.opacity = Animation.animate(driver, sampler)
             driver.start()
 
-            return new Promise((resolve) => {
-                driver.onCompleted().subscribe((event) => {
-                    resolve(event)
-                })
-            })
+            return EventSourceToPromise(driver.onCompleted())
         })
     }
 
     animatePuffOfSmoke(): Promise<void> {
-        this.puffOfSmoke.birthrate = Reactive.val(4000)
+        this.puffOfSmoke.birthrate = Reactive.val(2000)
 
         Time.setTimeout(() => {
             // this.animateForehead(500 - 350)
@@ -73,7 +70,7 @@ class AloneTogetherScene {
         return new Promise((resolve) => {
             Time.setTimeout(() => {
                 resolve()
-            }, 1000)
+            }, 500)
         })
     }
 
@@ -95,7 +92,7 @@ class AloneTogetherScene {
                         face.forehead.top.y.pinLastValue(),
                         face.forehead.top.z.pinLastValue()),
                     Reactive.point(0, 0, 0),
-                    1000,
+                    1250,
                     letterIndex
                 )
             }).then(() => {
