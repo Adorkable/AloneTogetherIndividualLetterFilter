@@ -1,9 +1,7 @@
-import { Diagnostics } from "./SelectLetter";
-
 const Audio = require('Audio');
 const Time = require('Time')
 
-const EventSourceToPromise = (eventSource: EventSource): Promise<mixed> => {
+const EventSourceToPromise = <EventType>(eventSource: EventSource<EventType>): Promise<mixed<EventType>> => {
     return new Promise((resolve) => {
         eventSource.subscribe((event) => {
             resolve(event)

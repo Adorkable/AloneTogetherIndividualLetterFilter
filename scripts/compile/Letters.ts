@@ -73,7 +73,7 @@ class Letters {
         scale: PointSignal,
         durationMilliseconds: number,
         fasterLetter: number | void
-    ): Promise<mixed> {
+    ): Promise<mixed<void>> {
         const slowerDriver = Animation.timeDriver({
             durationMilliseconds,
             loopCount: 1,
@@ -125,7 +125,7 @@ class Letters {
 
         fasterDriver.start()
         slowerDriver.start()
-        return EventSourceToPromise(slowerDriver.onCompleted())
+        return EventSourceToPromise<void>(slowerDriver.onCompleted())
     }
 
     letterAtIndex(index: number): LetterInformation | void {

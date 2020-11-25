@@ -10,17 +10,17 @@
 /*/// <reference path="../ConstScalarSignal/index.d.ts" />*/
 /// <reference path="../Reactive.PointSignal/index.d.ts" />
 declare interface ScalarSignal {
-    /** 
-    * ```
-    (get) lastValue: number
-    (set) (Not Available)
-    ```
-    
-    Specifies a number that represents the last value of the signal.
-    
-    **Note**: The signal value is updated during simulation tick. This means that the value of `lastValue` is undefined before its first update. It is also undefined for signals that aren't used for any bindings/subscriptions, because those signals aren't guaranteed to be updated at each simulation tick.
-    */
-    lastValue: number;
+        /** 
+        * ```
+        (get) lastValue: number
+        (set) (Not Available)
+        ```
+        
+        Specifies a number that represents the last value of the signal.
+        
+        **Note**: The signal value is updated during simulation tick. This means that the value of `lastValue` is undefined before its first update. It is also undefined for signals that aren't used for any bindings/subscriptions, because those signals aren't guaranteed to be updated at each simulation tick.
+        */
+        lastValue: number;
 /** 
 *  
  * lt(other: ScalarSignal): BoolSignal
@@ -30,7 +30,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.lt`
  */lt(other: ScalarSignal | number): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -41,7 +41,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.ceil`
  */ceil(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -54,7 +54,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.eq`
  */eq(other: ScalarSignal | number): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -63,7 +63,7 @@ declare interface ScalarSignal {
  * 
  * Maps x from [min, max] range to [0.0, 1.0] range.
  */fromRange(x: ScalarSignal | number, min: ScalarSignal | number, max: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -80,7 +80,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.trigger`, `ReactiveModule.multiTrigger`.
  */interval(threshold: number): EventSource
-        ;
+                ;
 
 /** 
 *  
@@ -89,7 +89,7 @@ declare interface ScalarSignal {
  * 
  * Returns the magnitude of the vector as a `ScalarSignal`.
  */magnitude(v: VectorSignal): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -101,7 +101,7 @@ declare interface ScalarSignal {
  * 
  * **Note**: The initialValue is assumed to be `false` if it isn't specified.
  */schmittTrigger(config: { low: number, high: number, initialValue: boolean | void }): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -114,7 +114,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.ne`
  */ne(other: ScalarSignal | number): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -125,7 +125,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.gt`
  */gt(other: ScalarSignal | number): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -136,7 +136,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `VectorSignal.dot`, `ScalarSignal.mul`, `VectorSignal.mul`
  */cross(v1: VectorSignal, v2: VectorSignal): VectorSignal
-        ;
+                ;
 
 /** 
 *  
@@ -147,7 +147,7 @@ declare interface ScalarSignal {
  * 
  * **Note**: `ScalarSignal.format` allows more flexible control over the way the number is converted to string.
  */toString(): StringSignal
-        ;
+                ;
 
 /** 
 *  
@@ -158,7 +158,7 @@ declare interface ScalarSignal {
  * 
  * **Note**: See also `ReactiveModule.expSmooth`.
  */expSmooth(dampFactor: number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -169,7 +169,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.ge`
  */ge(other: ScalarSignal | number): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -178,7 +178,7 @@ declare interface ScalarSignal {
  * 
  * Returns a `ScalarSignal` containing a constant value which is the value of the specified signal immediately after `pin` is called.
  */pin(): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -186,7 +186,7 @@ declare interface ScalarSignal {
  *  
  * Delays a signal. The argument is an object with a "milliseconds" property specifying the delay duration in milliseconds.
  */delayBy(timeSpan: { milliseconds: number }): this
-        ;
+                ;
 
 /** 
 *  
@@ -197,7 +197,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.le`
  */le(other: ScalarSignal | number): BoolSignal
-        ;
+                ;
 
 /** 
 *  
@@ -208,7 +208,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.mod`
  */mod(x: ScalarSignal | number, y: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -223,7 +223,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.multiTrigger`, `ReactiveModule.interval`.
  */trigger(threshold: number): EventSource
-        ;
+                ;
 
 /** 
 *  
@@ -236,28 +236,27 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.toString`.
  */format(formatString: string): StringSignal
-        ;
+                ;
 
-/** 
-* 
- *  
- * monitor(): EventSource
- * monitor(config: { fireOnInitialValue: boolean | void}): EventSource
- *  
- * 
- * Returns an `EventSource` that emits an event every time the value of the input signal changes. The event contains a JSON object with the old and new values in the format:
- * 
- *  
- * { "oldValue": val, "newValue": val }
- *  
- * 
- * **Note**: By default, there is no event fired for the initial value of the signal. If `config.fireOnInitialValue` is set to `true` then an event for initial signal value is also emitted. `oldValue` is unset for this initial event.
- * 
- */monitor(): EventSource
-        ;
+        /** 
+        * 
+         *  
+         * monitor(): EventSource
+         * monitor(config: { fireOnInitialValue: boolean | void}): EventSource
+         *  
+         * 
+         * Returns an `EventSource` that emits an event every time the value of the input signal changes. The event contains a JSON object with the old and new values in the format:
+         * 
+         *  
+         * { "oldValue": val, "newValue": val }
+         *  
+         * 
+         * **Note**: By default, there is no event fired for the initial value of the signal. If `config.fireOnInitialValue` is set to `true` then an event for initial signal value is also emitted. `oldValue` is unset for this initial event.
+         * 
+         */
+        monitor(): EventSource;
 
-    monitor(config: { fireOnInitialValue: boolean | void }): EventSource
-        ;
+        monitor(config: { fireOnInitialValue: boolean | void }): EventSource;
 
 /** 
 *  
@@ -268,7 +267,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.sqrt`
  */sqrt(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -280,10 +279,10 @@ declare interface ScalarSignal {
  * Historical signal values are going to be initialized with signal value at call time or using `initialValues` if provided.
  * 
  */history(framesCount: number): ScalarSignalHistory
-        ;
+                ;
 
-    history(framesCount: number, initialValues: Array<number>): ScalarSignalHistory
-        ;
+        history(framesCount: number, initialValues: Array<number>): ScalarSignalHistory
+                ;
 
 /** 
 *  
@@ -298,7 +297,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.trigger`, `ReactiveModule.interval`.
  */multiTrigger(threshold: number): EventSource
-        ;
+                ;
 
 /** 
 *  
@@ -308,7 +307,7 @@ declare interface ScalarSignal {
  * Returns a `ConstScalarSignal` containing a constant value which is the last value of the specified signal before `pinLastValue` is called.
  * ConstScalarSignal can be passed to a functions which accept numbers.
  */pinLastValue(): number//ConstScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -319,7 +318,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.abs`
  */abs(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -331,10 +330,10 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.neg`, `VectorSignal.neg`
  */neg(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
-    neg(x: VectorSignal): VectorSignal
-        ;
+        neg(x: VectorSignal): VectorSignal
+                ;
 
 /** 
 *  
@@ -345,7 +344,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.floor`
  */floor(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -358,7 +357,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.round`
  */round(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -368,7 +367,7 @@ declare interface ScalarSignal {
  * Returns 0.0 if x is less than edge0, and 1.0 if x is greater than edge1.
  * If x is between edge0 and edge1, smooth Hermite interpolation is performed.
  */smoothStep(x: ScalarSignal | number, edge0: ScalarSignal | number, edge1: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -379,7 +378,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `VectorSignal.cross`, `ScalarSignal.mul`, `VectorSignal.mul`
  */dot(v1: VectorSignal, v2: VectorSignal): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -392,7 +391,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.sign`
  */sign(x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -408,16 +407,16 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.sum`, `ScalarSignal.add`, `PointSignal.add`, `VectorSignal.add`
  */add(x: ScalarSignal | number, y: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
-    add(x: PointSignal, y: VectorSignal): PointSignal
-        ;
+        add(x: PointSignal, y: VectorSignal): PointSignal
+                ;
 
-    add(x: VectorSignal, y: PointSignal): PointSignal
-        ;
+        add(x: VectorSignal, y: PointSignal): PointSignal
+                ;
 
-    add(x: VectorSignal, y: VectorSignal): VectorSignal
-        ;
+        add(x: VectorSignal, y: VectorSignal): VectorSignal
+                ;
 
 /** 
 *  
@@ -433,16 +432,16 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ReactiveModule.sum`, `ScalarSignal.add`, `PointSignal.add`, `VectorSignal.add`
  */sum(x: ScalarSignal | number, y: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
-    sum(x: PointSignal, y: VectorSignal): PointSignal
-        ;
+        sum(x: PointSignal, y: VectorSignal): PointSignal
+                ;
 
-    sum(x: VectorSignal, y: PointSignal): PointSignal
-        ;
+        sum(x: VectorSignal, y: PointSignal): PointSignal
+                ;
 
-    sum(x: VectorSignal, y: VectorSignal): VectorSignal
-        ;
+        sum(x: VectorSignal, y: VectorSignal): VectorSignal
+                ;
 
 /** 
 *  
@@ -456,16 +455,16 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.sub`, `VectorSignal.sub`, `PointSignal.sub`
  */sub(x: ScalarSignal | number, y: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
-    sub(x: PointSignal, y: VectorSignal): PointSignal
-        ;
+        sub(x: PointSignal, y: VectorSignal): PointSignal
+                ;
 
-    sub(x: VectorSignal, y: VectorSignal): VectorSignal
-        ;
+        sub(x: VectorSignal, y: VectorSignal): VectorSignal
+                ;
 
-    sub(x: PointSignal, y: PointSignal): VectorSignal
-        ;
+        sub(x: PointSignal, y: PointSignal): VectorSignal
+                ;
 
 /** 
 *  
@@ -476,7 +475,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.div`
  */div(x: ScalarSignal | number, y: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -489,7 +488,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.pow`
  */pow(base: ScalarSignal | number, exponent: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -499,10 +498,10 @@ declare interface ScalarSignal {
  * 
  * Calculates the reflection direction for an incident vector and a normal as a `VectorSignal`.
  */reflect(incident: VectorSignal, normal: VectorSignal): VectorSignal
-        ;
+                ;
 
-    reflect(normal: VectorSignal): VectorSignal
-        ;
+        reflect(normal: VectorSignal): VectorSignal
+                ;
 
 /** 
 *  
@@ -516,16 +515,16 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.mul`, `VectorSignal.mul`
  */mul(x: ScalarSignal | number, y: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
-    mul(x: VectorSignal, y: ScalarSignal | number): VectorSignal
-        ;
+        mul(x: VectorSignal, y: ScalarSignal | number): VectorSignal
+                ;
 
-    mul(x: ScalarSignal | number, y: VectorSignal): VectorSignal
-        ;
+        mul(x: ScalarSignal | number, y: VectorSignal): VectorSignal
+                ;
 
-    mul(x: VectorSignal, y: VectorSignal): VectorSignal
-        ;
+        mul(x: VectorSignal, y: VectorSignal): VectorSignal
+                ;
 
 /** 
 *  
@@ -536,7 +535,7 @@ declare interface ScalarSignal {
  * 
  * **See Also**: `ScalarSignal.atan2`
  */atan2(y: ScalarSignal | number, x: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -545,7 +544,7 @@ declare interface ScalarSignal {
  * 
  * Maps x from [0.0, 1.0] range to [min, max] range.
  */toRange(x: ScalarSignal | number, min: ScalarSignal | number, max: ScalarSignal | number): ScalarSignal
-        ;
+                ;
 
 /** 
 *  
@@ -555,10 +554,10 @@ declare interface ScalarSignal {
  * 
  * Returns the normalized (unit) vector in the direction of the original vector as a `VectorSignal`.
  */normalize(v: VectorSignal): VectorSignal
-        ;
+                ;
 
-    normalize(): VectorSignal
-        ;
+        normalize(): VectorSignal
+                ;
 
 /** 
 *  
@@ -567,6 +566,6 @@ declare interface ScalarSignal {
  * 
  * Returns the distance from the point to another point as a `ScalarSignal`.
  */distance(v1: PointSignal, v2: PointSignal): ScalarSignal
-        ;
+                ;
 
 } 

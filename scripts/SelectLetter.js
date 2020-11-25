@@ -6,7 +6,6 @@ exports.Diagnostics = require('Diagnostics');
 var Patches = require('Patches');
 var Reactive = require('Reactive');
 var TouchGestures = require('TouchGestures');
-var Animation = require('Animation');
 var canvas0 = Scene.root.findFirst('canvas0');
 var aloneY = 0;
 var togetherY = 345;
@@ -84,5 +83,7 @@ TouchGestures.onTap(canvas0).subscribe(function () {
         letterIndexSignal.monitor().subscribe(function (event) {
             setLetterEnding(event.newValue);
         });
+    })["catch"](function (error) {
+        exports.Diagnostics.log("While setting up letter ending: " + error);
     });
 });

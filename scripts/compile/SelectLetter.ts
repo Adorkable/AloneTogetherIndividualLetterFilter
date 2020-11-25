@@ -4,15 +4,19 @@ export const Diagnostics = require('Diagnostics');
 const Patches = require('Patches');
 const Reactive = require('Reactive');
 const TouchGestures = require('TouchGestures');
-const Animation = require('Animation');
 
 const canvas0 = Scene.root.findFirst('canvas0');
 
 const aloneY = 0
 const togetherY = 345
 const endScale = Reactive.point2d(1, 1)
-const endings = [
 
+interface Ending {
+	position: PointSignal
+	scale: PointSignal
+}
+
+const endings: Array<Ending> = [
 	{ // a
 		position: Reactive.point2d(0, aloneY),
 		scale: endScale
@@ -79,7 +83,7 @@ const endings = [
 	}
 ];
 
-const setLetterEnding = (letterIndex) => {
+const setLetterEnding = (letterIndex: number) => {
 	const ending = endings[letterIndex];
 	if (!ending) {
 		throw Error("No endings for letterIndex '" + letterIndex + "'")
@@ -94,12 +98,15 @@ const setLetterEnding = (letterIndex) => {
 
 TouchGestures.onTap(canvas0).subscribe(function () {
 	Patches.outputs.getScalar('letterIndex')
-		.then((letterIndexSignal) => {
+		.then((letterIndexSignal: ScalarSignal) => {
 			const letterIndex = letterIndexSignal.pinLastValue()
 			setLetterEnding(letterIndex)
 
 			letterIndexSignal.monitor().subscribe((event) => {
 				setLetterEnding(event.newValue)
 			})
-		});
+		})
+		.catch((error) => {
+			Diagnostics.log("While setting up letter ending: " + error)
+		})
 });

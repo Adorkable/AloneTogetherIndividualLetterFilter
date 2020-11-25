@@ -262,11 +262,11 @@ declare interface ParticleSystem {
             
             ** Note **: all the coordinates must be non - negative.For negative values, the absolute value is used.
     */
-    setPositionModifier(newValue: ArrayOfScalarSamplers)
+    setPositionModifier(newValue: Array<ScalarSampler>)
     /*
         ```
             (get) (Not Available)
-            (set) positionModifier: ArrayOfScalarSamplers
+            (set) positionModifier: Array<ScalarSampler>
             ```
     
     Specifies the modifier that will be added to the particle position according to the supplied sampler relative to the current relative lifetime of the particle.In other words, if the lifetime is 4 seconds and the particle has lived for is 3 seconds, the modifier will be sampled at 3 / 4 = 0.75.
@@ -367,11 +367,11 @@ declare interface ParticleSystem {
     
     Retrieves the ParticleTypeDescriptions
     */
-    setVelocityModifier(newValue: ArrayOfScalarSamplers)
+    setVelocityModifier(newValue: Array<ScalarSampler>)
     /*
         ```
             (get) (Not Available)
-            (set) velocityModifier: ArrayOfScalarSamplers
+            (set) velocityModifier: Array<ScalarSampler>
             ```
     
     Specifies the modifier that will be added to the particle velocity according to the supplied sampler relative to the current relative lifetime of the particle.In other words, if the lifetime is 4 seconds and the particle has lived for is 3 seconds, the modifier will be sampled at 3 / 4 = 0.75.
